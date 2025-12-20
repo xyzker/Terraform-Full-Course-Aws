@@ -1,4 +1,4 @@
-terraform {
+/*terraform {
   backend "s3" {
     bucket = "my-terraform-state-bucket-day08" # Can be passed via `-backend-config="bucket=<bucket name>"` in the `init` command
     key    = "dev/terraform.tfstate"           # Can be passed via `-backend-config="key=<state file path>"` in the `init` command
@@ -9,3 +9,4 @@ terraform {
     # encrypt        = true
   }
 }
+*/
