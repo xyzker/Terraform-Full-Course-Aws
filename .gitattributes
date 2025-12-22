@@ -1,0 +1,13 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Explicitly declare text files you want to always be normalized to LF
+*.c text
+*.h text
+*.js text
+*.py text
+
+# Force bash scripts to always be LF (Critical for Linux execution)
+*.sh text eol=lf
+
+
