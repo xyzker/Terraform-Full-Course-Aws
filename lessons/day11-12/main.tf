@@ -149,31 +149,31 @@ resource "aws_security_group" "app_sg" {
 # Uncomment to test
 # ==============================================================================
 
-# locals {
-#   # Lookup instance size based on environment, with fallback
-#   instance_size = lookup(var.instance_sizes, var.environment, "t2.micro")
-# }
+locals {
+  # Lookup instance size based on environment, with fallback
+  instance_size = lookup(var.instance_sizes, var.environment, "t2.micro")
+}
 
-# data "aws_ami" "amazon_linux" {
-#   most_recent = true
-#   owners      = ["amazon"]
+data "aws_ami" "amazon_linux" {
+  most_recent = true
+  owners      = ["amazon"]
 
-#   filter {
-#     name   = "name"
-#     values = ["amzn2-ami-hvm-*-x86_64-gp2"]
-#   }
-# }
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+  }
+}
 
-# resource "aws_instance" "app_server" {
-#   ami           = data.aws_ami.amazon_linux.id
-#   instance_type = local.instance_size
+resource "aws_instance" "app_server" {
+  ami           = data.aws_ami.amazon_linux.id
+  instance_type = local.instance_size
 
-#   tags = {
-#     Name        = "app-server-${var.environment}"
-#     Environment = var.environment
-#     Size        = local.instance_size
-#   }
-# }
+  tags = {
+    Name        = "app-server-${var.environment}"
+    Environment = var.environment
+    Size        = local.instance_size
+  }
+}
 
 # ==============================================================================
 # ASSIGNMENT 6: Instance Type Validation
