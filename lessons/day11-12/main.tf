@@ -257,11 +257,11 @@ locals {
 # Uncomment to test
 # ==============================================================================
 
-# locals {
-#   # Combine location lists and remove duplicates
-#   all_locations    = concat(var.user_locations, var.default_locations)
-#   unique_locations = toset(local.all_locations)
-# }
+locals {
+  # Combine location lists and remove duplicates
+  all_locations    = concat(var.user_locations, var.default_locations)
+  unique_locations = toset(local.all_locations)
+}
 
 # ==============================================================================
 # ASSIGNMENT 10: Cost Calculation
