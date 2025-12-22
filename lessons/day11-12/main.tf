@@ -291,29 +291,29 @@ locals {
 # Uncomment to test
 # ==============================================================================
 
-# locals {
-#   # Generate current timestamp
-#   current_timestamp = timestamp()
-#   
-#   # Format for resource names: YYYYMMDD
-#   resource_date_suffix = formatdate("YYYYMMDD", local.current_timestamp)
-#   
-#   # Format for tags: DD-MM-YYYY
-#   tag_date_format = formatdate("DD-MM-YYYY", local.current_timestamp)
-#   
-#   # Create timestamped resource name
-#   timestamped_name = "backup-${local.resource_date_suffix}"
-# }
+locals {
+  # Generate current timestamp
+  current_timestamp = timestamp()
+  
+  # Format for resource names: YYYYMMDD
+  resource_date_suffix = formatdate("YYYYMMDD", local.current_timestamp)
+  
+  # Format for tags: DD-MM-YYYY
+  tag_date_format = formatdate("DD-MM-YYYY", local.current_timestamp)
+  
+  # Create timestamped resource name
+  timestamped_name = "backup-${local.resource_date_suffix}"
+}
 
-# resource "aws_s3_bucket" "timestamped_bucket" {
-#   bucket = "my-backup-${local.resource_date_suffix}"
-#   
-#   tags = {
-#     Name       = local.timestamped_name
-#     CreatedOn  = local.tag_date_format
-#     Timestamp  = local.current_timestamp
-#   }
-# }
+resource "aws_s3_bucket" "timestamped_bucket" {
+  bucket = "my-backup-${local.resource_date_suffix}"
+  
+  tags = {
+    Name       = local.timestamped_name
+    CreatedOn  = local.tag_date_format
+    Timestamp  = local.current_timestamp
+  }
+}
 
 # ==============================================================================
 # ASSIGNMENT 12: File Content Handling
@@ -322,45 +322,45 @@ locals {
 # Uncomment to test (requires config.json file)
 # ==============================================================================
 
-# # Note: Create a config.json file first to test this
-# # Example config.json:
-# # {
-# #   "database": {
-# #     "host": "db.example.com",
-# #     "port": 5432,
-# #     "username": "admin"
-# #   }
-# # }
-
-# locals {
-#   # Read and parse JSON configuration file
-#   config_file_exists = fileexists("./config.json")
-#   
-#   config_data = local.config_file_exists ? jsondecode(file("./config.json")) : {
-#     database = {
-#       host     = "localhost"
-#       port     = 5432
-#       username = "default"
-#     }
+# Note: Create a config.json file first to test this
+# Example config.json:
+# {
+#   "database": {
+#     "host": "db.example.com",
+#     "port": 5432,
+#     "username": "admin"
 #   }
 # }
 
-# # Store sensitive configuration in AWS Secrets Manager
-# resource "aws_secretsmanager_secret" "app_config" {
-#   name        = "app-configuration-${formatdate("YYYYMMDD-hhmm", timestamp())}"
-#   description = "Application configuration from file"
-#   
-#   tags = {
-#     Name        = "app-config"
-#     Sensitive   = "true"
-#     ConfigFile  = "./config.json"
-#   }
-# }
+locals {
+  # Read and parse JSON configuration file
+  config_file_exists = fileexists("./config.json")
+  
+  config_data = local.config_file_exists ? jsondecode(file("./config.json")) : {
+    database = {
+      host     = "localhost"
+      port     = 5432
+      username = "default"
+    }
+  }
+}
 
-# resource "aws_secretsmanager_secret_version" "app_config" {
-#   secret_id     = aws_secretsmanager_secret.app_config.id
-#   secret_string = jsonencode(local.config_data)
-# }
+# Store sensitive configuration in AWS Secrets Manager
+resource "aws_secretsmanager_secret" "app_config" {
+  name        = "app-configuration-${formatdate("YYYYMMDD-hhmm", timestamp())}"
+  description = "Application configuration from file"
+  
+  tags = {
+    Name        = "app-config"
+    Sensitive   = "true"
+    ConfigFile  = "./config.json"
+  }
+}
+
+resource "aws_secretsmanager_secret_version" "app_config" {
+  secret_id     = aws_secretsmanager_secret.app_config.id
+  secret_string = jsonencode(local.config_data)
+}
 
 # ==============================================================================
 # DATA SOURCES (Available for all assignments)
