@@ -270,19 +270,19 @@ locals {
 # Uncomment to test
 # ==============================================================================
 
-# locals {
-#   # Convert negative values (credits) to positive
-#   positive_costs = [for cost in var.monthly_costs : abs(cost)]
-#   
-#   # Find maximum cost
-#   max_cost = max(local.positive_costs...)
-#   
-#   # Calculate total
-#   total_cost = sum(local.positive_costs)
-#   
-#   # Calculate average
-#   avg_cost = local.total_cost / length(local.positive_costs)
-# }
+locals {
+  # Convert negative values (credits) to positive
+  positive_costs = [for cost in var.monthly_costs : abs(cost)]
+  
+  # Find maximum cost
+  max_cost = max(local.positive_costs...)
+  
+  # Calculate total
+  total_cost = sum(local.positive_costs)
+  
+  # Calculate average
+  avg_cost = local.total_cost / length(local.positive_costs)
+}
 
 # ==============================================================================
 # ASSIGNMENT 11: Timestamp Management
