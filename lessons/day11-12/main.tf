@@ -44,16 +44,16 @@ resource "aws_resourcegroups_group" "project" {
 # Uncomment to test
 # ==============================================================================
 
-# locals {
-#   # Merge default tags with environment-specific tags
-#   merged_tags = merge(var.default_tags, var.environment_tags)
-# }
+locals {
+  # Merge default tags with environment-specific tags
+  merged_tags = merge(var.default_tags, var.environment_tags)
+}
 
-# resource "aws_vpc" "tagged_vpc" {
-#   cidr_block = "10.0.0.0/16"
+resource "aws_vpc" "tagged_vpc" {
+  cidr_block = "10.0.0.0/16"
 
-#   tags = local.merged_tags
-# }
+  tags = local.merged_tags
+}
 
 # ==============================================================================
 # ASSIGNMENT 3: S3 Bucket Naming
@@ -62,16 +62,16 @@ resource "aws_resourcegroups_group" "project" {
 # Uncomment to test
 # ==============================================================================
 
-# locals {
-#   # S3 bucket names: max 63 chars, lowercase, no spaces or special chars
-#   formatted_bucket_name = replace(
-#     replace(
-#       lower(substr(var.bucket_name, 0, 63)),
-#       " ", ""
-#     ),
-#     "!", ""
-#   )
-# }
+locals {
+  # S3 bucket names: max 63 chars, lowercase, no spaces or special chars
+  formatted_bucket_name = replace(
+    replace(
+      lower(substr(var.bucket_name, 0, 63)),
+      " ", ""
+    ),
+    "!", ""
+  )
+}
 
 # resource "aws_s3_bucket" "storage" {
 #   bucket = local.formatted_bucket_name
