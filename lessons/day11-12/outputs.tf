@@ -2,15 +2,15 @@
 # ASSIGNMENT 1 OUTPUTS: Project Naming
 # ==============================================================================
 
-# output "formatted_project_name" {
-#   description = "Formatted project name (lowercase with hyphens)"
-#   value       = local.formatted_project_name
-# }
+output "formatted_project_name" {
+  description = "Formatted project name (lowercase with hyphens)"
+  value       = local.formatted_project_name
+}
 
-# output "resource_group_name" {
-#   description = "Created resource group name"
-#   value       = aws_resourcegroups_group.project.name
-# }
+output "resource_group_name" {
+  description = "Created resource group name"
+  value       = aws_resourcegroups_group.project.name
+}
 
 # ==============================================================================
 # ASSIGNMENT 2 OUTPUTS: Resource Tagging

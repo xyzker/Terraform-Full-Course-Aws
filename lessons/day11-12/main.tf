@@ -13,29 +13,29 @@
 # Uncomment to test
 # ==============================================================================
 
-# locals {
-#   # Transform "Project ALPHA Resource" to "project-alpha-resource"
-#   formatted_project_name = lower(replace(var.project_name, " ", "-"))
-# }
+locals {
+  # Transform "Project ALPHA Resource" to "project-alpha-resource"
+  formatted_project_name = lower(replace(var.project_name, " ", "-"))
+}
 
-# resource "aws_resourcegroups_group" "project" {
-#   name = local.formatted_project_name
+resource "aws_resourcegroups_group" "project" {
+  name = local.formatted_project_name
 
-#   resource_query {
-#     query = jsonencode({
-#       ResourceTypeFilters = ["AWS::AllSupported"]
-#       TagFilters = [{
-#         Key    = "Project"
-#         Values = [local.formatted_project_name]
-#       }]
-#     })
-#   }
+  resource_query {
+    query = jsonencode({
+      ResourceTypeFilters = ["AWS::AllSupported"]
+      TagFilters = [{
+        Key    = "Project"
+        Values = [local.formatted_project_name]
+      }]
+    })
+  }
 
-#   tags = {
-#     Name    = local.formatted_project_name
-#     Project = local.formatted_project_name
-#   }
-# }
+  tags = {
+    Name    = local.formatted_project_name
+    Project = local.formatted_project_name
+  }
+}
 
 # ==============================================================================
 # ASSIGNMENT 2: Resource Tagging
