@@ -52,25 +52,25 @@ output "resource_group_name" {
 # ==============================================================================
 # Uncomment when testing Assignment 4
 
-# output "port_list" {
-#   description = "List of ports from comma-separated string"
-#   value       = local.port_list
-# }
+output "port_list" {
+  description = "List of ports from comma-separated string"
+  value       = local.port_list
+}
 
-# output "security_group_rules" {
-#   description = "Generated security group rules"
-#   value       = local.sg_rules
-# }
+output "security_group_rules" {
+  description = "Generated security group rules"
+  value       = local.sg_rules
+}
 
-# output "formatted_ports" {
-#   description = "Formatted port string for documentation"
-#   value       = local.formatted_ports
-# }
+output "formatted_ports" {
+  description = "Formatted port string for documentation"
+  value       = local.formatted_ports
+}
 
-# output "security_group_id" {
-#   description = "ID of created security group"
-#   value       = aws_security_group.app_sg.id
-# }
+output "security_group_id" {
+  description = "ID of created security group"
+  value       = aws_security_group.app_sg.id
+}
 
 # ==============================================================================
 # ASSIGNMENT 5 OUTPUTS: Environment Configuration
