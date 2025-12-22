@@ -112,22 +112,22 @@ output "security_group_id" {
 # ==============================================================================
 # Uncomment when testing Assignment 7
 
-# output "backup_name" {
-#   description = "Backup configuration name (validated)"
-#   value       = var.backup_name
-# }
+output "backup_name" {
+  description = "Backup configuration name (validated)"
+  value       = var.backup_name
+}
 
-# output "backup_credential" {
-#   description = "Backup credential (sensitive)"
-#   value       = var.credential
-#   sensitive   = true
-# }
+output "backup_credential" {
+  description = "Backup credential (sensitive)"
+  value       = var.credential
+  sensitive   = true
+}
 
-# output "backup_config" {
-#   description = "Complete backup configuration"
-#   value       = local.backup_config
-#   sensitive   = true
-# }
+output "backup_config" {
+  description = "Complete backup configuration"
+  value       = local.backup_config
+  sensitive   = true
+}
 
 # ==============================================================================
 # ASSIGNMENT 8 OUTPUTS: File Path Processing
