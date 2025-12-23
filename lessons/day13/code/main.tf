@@ -6,7 +6,7 @@ provider "aws" {
 data "aws_vpc" "shared" {
   filter {
     name   = "tag:Name"
-    values = ["shared-network-vpc"]
+    values = ["default"]
   }
 }
 
@@ -14,7 +14,7 @@ data "aws_vpc" "shared" {
 data "aws_subnet" "shared" {
   filter {
     name   = "tag:Name"
-    values = ["shared-primary-subnet"]
+    values = ["us-east-1e"]
   }
   vpc_id = data.aws_vpc.shared.id
 }
